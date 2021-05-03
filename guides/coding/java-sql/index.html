@@ -1,0 +1,375 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=author content="KOTALEX "><meta name=description content="Содержание Шаг первый: Установка Шаг полтора: Если на удалённой машине Шаг второй: Тестовая Java программа Бонус: Подключение через SSH  Вариант 1: Всё ручками Вариант 2: Мы же используем java, так ведь?   Шаг третий: Hibernate pizza time   Шаг первый: Установка Гайд предназначен, чтобы именно подключить MySQL, hibernate, и, возможно, jsch с нуля. Но это не руководство, как пользоваться этим вот всем. Постараюсь объяснять всё по ходу текста, но, встречая незнакомые слова, пробуйте их &amp;ldquo;загуглить&amp;rdquo;."><meta name=keywords content><meta name=robots content="noodp"><meta name=theme-color content><link rel=canonical href=the220th.github.io/guides/coding/java-sql/><title>Подключение SQL в Java без IDE // 220th stash</title><link href=https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css rel=stylesheet type=text/css><link rel=stylesheet href=/the220th.github.io/main.5281e677675dae147ee42cc6b44cf319d3750e7dfc9e90eabf9884616f675a67.css><meta itemprop=name content="Подключение SQL в Java без IDE"><meta itemprop=description content="Содержание Шаг первый: Установка Шаг полтора: Если на удалённой машине Шаг второй: Тестовая Java программа Бонус: Подключение через SSH  Вариант 1: Всё ручками Вариант 2: Мы же используем java, так ведь?   Шаг третий: Hibernate pizza time   Шаг первый: Установка Гайд предназначен, чтобы именно подключить MySQL, hibernate, и, возможно, jsch с нуля. Но это не руководство, как пользоваться этим вот всем. Постараюсь объяснять всё по ходу текста, но, встречая незнакомые слова, пробуйте их &ldquo;загуглить&rdquo;."><meta itemprop=datePublished content="2021-04-14T21:49:58+03:00"><meta itemprop=dateModified content="2021-04-14T21:49:58+03:00"><meta itemprop=wordCount content="2492"><meta itemprop=image content="the220th.github.io"><meta itemprop=keywords content><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="the220th.github.io"><meta name=twitter:title content="Подключение SQL в Java без IDE"><meta name=twitter:description content="Содержание Шаг первый: Установка Шаг полтора: Если на удалённой машине Шаг второй: Тестовая Java программа Бонус: Подключение через SSH  Вариант 1: Всё ручками Вариант 2: Мы же используем java, так ведь?   Шаг третий: Hibernate pizza time   Шаг первый: Установка Гайд предназначен, чтобы именно подключить MySQL, hibernate, и, возможно, jsch с нуля. Но это не руководство, как пользоваться этим вот всем. Постараюсь объяснять всё по ходу текста, но, встречая незнакомые слова, пробуйте их &ldquo;загуглить&rdquo;."><meta property="og:title" content="Подключение SQL в Java без IDE"><meta property="og:description" content="Содержание Шаг первый: Установка Шаг полтора: Если на удалённой машине Шаг второй: Тестовая Java программа Бонус: Подключение через SSH  Вариант 1: Всё ручками Вариант 2: Мы же используем java, так ведь?   Шаг третий: Hibernate pizza time   Шаг первый: Установка Гайд предназначен, чтобы именно подключить MySQL, hibernate, и, возможно, jsch с нуля. Но это не руководство, как пользоваться этим вот всем. Постараюсь объяснять всё по ходу текста, но, встречая незнакомые слова, пробуйте их &ldquo;загуглить&rdquo;."><meta property="og:type" content="article"><meta property="og:url" content="the220th.github.io/guides/coding/java-sql/"><meta property="og:image" content="the220th.github.io"><meta property="article:section" content="guides"><meta property="article:published_time" content="2021-04-14T21:49:58+03:00"><meta property="article:modified_time" content="2021-04-14T21:49:58+03:00"><meta property="og:site_name" content="220th stash"><meta property="article:published_time" content="2021-04-14 21:49:58 +0300 +0300"></head><body><div class=container><header class=header><span class=header__inner><a href=/ style=text-decoration:none><div class=logo><span class=logo__mark>></span>
+<span class=logo__text>220th stash</span>
+<span class=logo__cursor></span></div></a><span class=header__right><nav class=menu><ul class=menu__inner><li><a href=/the220th.github.io/guides>Гайды</a></li><li><a href=/the220th.github.io/resources>Ресурсы</a></li></ul></nav><span class=menu-trigger><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg></span><span class="search-icon not-selectable"><a href=/search><svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" id="Capa_1" width="100%" height="100%" viewBox="0 0 300 300" style="enable-background:new 0 0 310.42 310.42" sodipodi:docname="magnifier.svg" inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"><defs id="defs45"/><sodipodi:namedview pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" objecttolerance="10" gridtolerance="10" guidetolerance="10" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-width="1844" inkscape:window-height="1057" id="namedview43" showgrid="false" inkscape:zoom="2.027334" inkscape:cx="196.11542" inkscape:cy="182.64093" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:window-maximized="1" inkscape:current-layer="Capa_1"/><g id="g10" transform="matrix(-1,0,0,1,310.41981,0)" style="fill:#c4c0ba;fill-opacity:1"><g id="g8" style="fill:#c4c0ba;fill-opacity:1"><path d="m273.587 214.965c49.11-49.111 49.109-129.021.0-178.132-49.111-49.111-129.02-49.111-178.13.0C53.793 78.497 47.483 140.462 76.51 188.85c0 0 2.085 3.498-.731 6.312-16.065 16.064-64.263 64.263-64.263 64.263-12.791 12.79-15.836 30.675-4.493 42.02l1.953 1.951c11.343 11.345 29.229 8.301 42.019-4.49.0.0 48.096-48.097 64.128-64.128 2.951-2.951 6.448-.866 6.448-.866 48.387 29.026 110.352 22.717 152.016-18.947zM118.711 191.71C82.423 155.422 82.424 96.378 118.712 60.09c36.288-36.287 95.332-36.288 131.619.0 36.288 36.287 36.288 95.332.0 131.62-36.288 36.286-95.331 36.286-131.62.0z" id="path2" style="fill:#c4c0ba;fill-opacity:1"/><g id="g6" style="fill:#c4c0ba;fill-opacity:1"><path d="m126.75 118.424c-1.689.0-3.406-.332-5.061-1.031-6.611-2.798-9.704-10.426-6.906-17.038 17.586-41.559 65.703-61.062 107.261-43.476 6.611 2.798 9.704 10.426 6.906 17.038-2.799 6.612-10.425 9.703-17.039 6.906-28.354-11.998-61.186 1.309-73.183 29.663-2.099 4.959-6.913 7.938-11.978 7.938z" id="path4" style="fill:#c4c0ba;fill-opacity:1"/></g></g></g><g id="g12" transform="matrix(-1,0,0,1,310.41981,0)" style="fill:#c4c0ba;fill-opacity:1"/><g id="g14" transform="matrix(-1,0,0,1,310.41981,0)" style="fill:#c4c0ba;fill-opacity:1"/><g id="g16" transform="matrix(-1,0,0,1,310.41981,0)" style="fill:#c4c0ba;fill-opacity:1"/><g id="g18" transform="matrix(-1,0,0,1,310.41981,0)" style="fill:#c4c0ba;fill-opacity:1"/><g id="g20" transform="matrix(-1,0,0,1,310.41981,0)" style="fill:#c4c0ba;fill-opacity:1"/><g id="g22" transform="matrix(-1,0,0,1,310.41981,0)" style="fill:#c4c0ba;fill-opacity:1"/><g id="g24" transform="matrix(-1,0,0,1,310.41981,0)" style="fill:#c4c0ba;fill-opacity:1"/><g id="g26" transform="matrix(-1,0,0,1,310.41981,0)" style="fill:#c4c0ba;fill-opacity:1"/><g id="g28" transform="matrix(-1,0,0,1,310.41981,0)" style="fill:#c4c0ba;fill-opacity:1"/><g id="g30" transform="matrix(-1,0,0,1,310.41981,0)" style="fill:#c4c0ba;fill-opacity:1"/><g id="g32" transform="matrix(-1,0,0,1,310.41981,0)" style="fill:#c4c0ba;fill-opacity:1"/><g id="g34" transform="matrix(-1,0,0,1,310.41981,0)" style="fill:#c4c0ba;fill-opacity:1"/><g id="g36" transform="matrix(-1,0,0,1,310.41981,0)" style="fill:#c4c0ba;fill-opacity:1"/><g id="g38" transform="matrix(-1,0,0,1,310.41981,0)" style="fill:#c4c0ba;fill-opacity:1"/><g id="g40" transform="matrix(-1,0,0,1,310.41981,0)" style="fill:#c4c0ba;fill-opacity:1"/></svg></a></span></span></span></header><div class=content><main class=post><div class=post-info></p></div><article><h2 class=post-title><a href=the220th.github.io/guides/coding/java-sql/>Подключение SQL в Java без IDE</a></h2><hr><div class=post-content><h2>Содержание</h2><nav id=TableOfContents><ul><li><a href=#шаг-первый-установка>Шаг первый: Установка</a></li><li><a href=#шаг-полтора-если-на-удалённой-машине>Шаг полтора: Если на удалённой машине</a></li><li><a href=#шаг-второй-тестовая-java-программа>Шаг второй: Тестовая Java программа</a></li><li><a href=#бонус-подключение-через-ssh>Бонус: Подключение через SSH</a><ul><li><a href=#вариант-1-всё-ручками>Вариант 1: Всё ручками</a></li><li><a href=#вариант-2-мы-же-используем-java-так-ведь>Вариант 2: Мы же используем java, так ведь?</a></li></ul></li><li><a href=#шаг-третий-hibernate-pizza-time>Шаг третий: Hibernate pizza time</a></li></ul></nav><h2 id=шаг-первый-установка>Шаг первый: Установка</h2><p>Гайд предназначен, чтобы именно подключить MySQL, hibernate, и, возможно, jsch с нуля. Но это не руководство, как пользоваться этим вот всем. Постараюсь объяснять всё по ходу текста, но, встречая незнакомые слова, пробуйте их &ldquo;загуглить&rdquo;. Возможно на изучение этого гайда уйдёт не один час.
+Как СУБД будем использовать MySQL. Установка будет производиться на xubuntu 20.04 TLS, но для Windows тоже подойдёт. Надо просто сразу переходить к шагу 2, но узнать, как устанавливать MySQL на Windows, придётся самому.</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>&gt; sudo apt update
+&gt; sudo apt install mysql-server mysql-client
+&gt; mysql -V
+</code></pre></div><p>В моём случае вывод такой: <code>mysql Ver 14.14 Distrib 5.7.33, for Linux (x86_64) using EditLine wrapper</code>. Т. е. MySQL версии 14.14</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>&gt; sudo systemctl status mysql
+&gt; sudo mysql_secure_installation
+</code></pre></div><p>На первом шаге настраивается плагин валидации пароля. Чтобы его включить нажмите Y, или его можно не включать. Затем надо задать сложность пароля, который позволит установить этот плагин. Здесь 0 означает слабый пароль, а 2 - сложный. Когда плагин будет настроен введите пароль root (root для СУБД, а не системы) и подтвердите, что хотите использовать именно его.
+Введите Y для отключения анонимного доступа к MySQL, затем ещё раз Y чтобы запретить подключаться к базе от имени root удаленно.
+Снова Y, чтобы удалить тестовую базу данных. Затем, обновите привилегии для пользователей.
+После завершения настройки вы можете подключиться пользователем root к серверу баз данных из командной строки.
+По умолчанию ваши созданные БД находятся в <code>/var/lib/mysql/</code></p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>&gt; sudo mysql -u root
+</code></pre></div><p>Теперь создадим пользователя, тестовые БД и таблицу.</p><div class=highlight><pre class=chroma><code class=language-sql data-lang=sql><span class=c1>-- Создание БД
+</span><span class=c1></span><span class=k>CREATE</span><span class=w> </span><span class=k>DATABASE</span><span class=w> </span><span class=n>testDB</span><span class=p>;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=n>use</span><span class=w> </span><span class=n>testDB</span><span class=p>;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c1>--Создание таблицы books
+</span><span class=c1></span><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=o>`</span><span class=n>books</span><span class=o>`</span><span class=w> </span><span class=p>(</span><span class=w>
+</span><span class=w>  </span><span class=o>`</span><span class=n>id</span><span class=o>`</span><span class=w> </span><span class=nb>int</span><span class=p>(</span><span class=mi>11</span><span class=p>)</span><span class=w> </span><span class=k>NOT</span><span class=w> </span><span class=k>NULL</span><span class=p>,</span><span class=w>
+</span><span class=w>  </span><span class=o>`</span><span class=n>name</span><span class=o>`</span><span class=w> </span><span class=nb>varchar</span><span class=p>(</span><span class=mi>50</span><span class=p>)</span><span class=w> </span><span class=k>NOT</span><span class=w> </span><span class=k>NULL</span><span class=p>,</span><span class=w>
+</span><span class=w>  </span><span class=o>`</span><span class=n>author</span><span class=o>`</span><span class=w> </span><span class=nb>varchar</span><span class=p>(</span><span class=mi>50</span><span class=p>)</span><span class=w> </span><span class=k>NOT</span><span class=w> </span><span class=k>NULL</span><span class=p>,</span><span class=w>
+</span><span class=w>  </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=w> </span><span class=p>(</span><span class=o>`</span><span class=n>id</span><span class=o>`</span><span class=p>)</span><span class=w>
+</span><span class=w></span><span class=p>)</span><span class=w> </span><span class=n>ENGINE</span><span class=o>=</span><span class=n>InnoDB</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=n>CHARSET</span><span class=o>=</span><span class=n>latin1</span><span class=p>;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c1>--Заполним таблицу какими-нибудь данными
+</span><span class=c1></span><span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=n>testDB</span><span class=p>.</span><span class=n>books</span><span class=w> </span><span class=p>(</span><span class=n>id</span><span class=p>,</span><span class=w> </span><span class=o>`</span><span class=n>name</span><span class=o>`</span><span class=p>,</span><span class=w> </span><span class=n>author</span><span class=p>)</span><span class=w>
+</span><span class=w>    </span><span class=k>VALUES</span><span class=w> </span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;Core Java, Volume I&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;Key Horstmann&#39;</span><span class=p>);</span><span class=w>
+</span><span class=w></span><span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=n>testDB</span><span class=p>.</span><span class=n>books</span><span class=w> </span><span class=p>(</span><span class=n>id</span><span class=p>,</span><span class=w> </span><span class=o>`</span><span class=n>name</span><span class=o>`</span><span class=p>,</span><span class=w> </span><span class=n>author</span><span class=p>)</span><span class=w>
+</span><span class=w>    </span><span class=k>VALUES</span><span class=w> </span><span class=p>(</span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;The Code Book&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;Simon Singh&#39;</span><span class=p>);</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c1>-- Создадим пользователя. Запомните его имя и пароль, нам они ещё пригодятся
+</span><span class=c1></span><span class=k>CREATE</span><span class=w> </span><span class=k>USER</span><span class=w> </span><span class=s1>&#39;testUser&#39;</span><span class=o>@</span><span class=s1>&#39;ip&#39;</span><span class=w> </span><span class=n>IDENTIFIED</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=s1>&#39;superUser.password2281337&#39;</span><span class=p>;</span><span class=w>
+</span><span class=w></span><span class=c1>-- удаление пользователя: DROP USER &#39;testUser&#39;@&#39;ip&#39;;
+</span><span class=c1>-- вместо ip нужно вписать ваш белый ip или localhost. Если не указать @&#39;ip&#39;, то будет @&#39;%&#39;, это означает, что всё разрешено
+</span><span class=c1></span><span class=w>
+</span><span class=w></span><span class=c1>-- Дадим созданному пользователю доступ к созданной БД
+</span><span class=c1></span><span class=k>GRANT</span><span class=w> </span><span class=k>ALL</span><span class=w> </span><span class=k>PRIVILEGES</span><span class=w> </span><span class=k>ON</span><span class=w> </span><span class=n>testDB</span><span class=p>.</span><span class=o>*</span><span class=w> </span><span class=k>TO</span><span class=w> </span><span class=s1>&#39;testUser&#39;</span><span class=o>@</span><span class=s1>&#39;ip&#39;</span><span class=p>;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=n>FLUSH</span><span class=w> </span><span class=k>PRIVILEGES</span><span class=p>;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c1>-- Посмотрим, что всё получилось
+</span><span class=c1></span><span class=k>SELECT</span><span class=w> </span><span class=k>user</span><span class=p>,</span><span class=k>host</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>mysql</span><span class=p>.</span><span class=k>user</span><span class=p>;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=k>SHOW</span><span class=w> </span><span class=n>GRANTS</span><span class=w> </span><span class=k>FOR</span><span class=w> </span><span class=s1>&#39;testUser&#39;</span><span class=o>@</span><span class=s1>&#39;ip&#39;</span><span class=p>;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=n>exit</span><span class=p>;</span><span class=w>
+</span></code></pre></div><p>Зайдём от имени созданного пользователя.</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>&gt; mysql -u testUser -p <span class=o>[</span>-h <span class=s1>&#39;ip&#39;</span><span class=o>]</span>
+</code></pre></div><p><code>[введите пароль]</code></p><div class=highlight><pre class=chroma><code class=language-sql data-lang=sql><span class=c1>-- Посмотрим, что имеем доступ к нашей таблице с книгами.
+</span><span class=c1></span><span class=k>SELECT</span><span class=w> </span><span class=n>id</span><span class=p>,</span><span class=w> </span><span class=n>name</span><span class=p>,</span><span class=w> </span><span class=n>author</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>testDB</span><span class=p>.</span><span class=n>books</span><span class=p>;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c1>-- Убедимся, что используется порт 3306
+</span><span class=c1></span><span class=k>show</span><span class=w> </span><span class=n>variables</span><span class=w> </span><span class=k>like</span><span class=w> </span><span class=s1>&#39;port&#39;</span><span class=p>;</span><span class=w>
+</span><span class=w></span><span class=c1>-- по умолчанию должен быть именно порт 3306
+</span><span class=c1></span><span class=w>
+</span><span class=w></span><span class=n>quit</span><span class=p>;</span><span class=w>
+</span></code></pre></div><h2 id=шаг-полтора-если-на-удалённой-машине>Шаг полтора: Если на удалённой машине</h2><p>Пару слов: Соединение с базой данных MySQL по умолчанию БЕЗ ШИФРОВАНИЯ. Возможно 4 варианта (скорее всего больше) решения этой проблемы:</p><ul><li>Шифровать всё в самой программе Java</li><li>Подключить и настроить MySQL SSL</li><li>Использовать VPN</li><li>И, наверное, самый разумный: подключаться к БД через SSH. Но тогда переходите сразу к <a href=#%D0%B1%D0%BE%D0%BD%D1%83%D1%81-%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-ssh>соответствующему шагу</a></li></ul><p>По умолчанию подключиться к СУБД можно только из <code>localhost</code>. Исправляем:</p><ol><li><p>В конфигурации <code>/etc/mysql/mysql.conf.d/mysqld.cnf</code> находим <code>"bind-address = 127.0.0.1"</code>. Меняем его на <code>"bind-address = 0.0.0.0"</code>.</p></li><li><p>Рестартим сервис:</p></li></ol><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>&gt; sudo systemctl restart mysql
+</code></pre></div><ol start=3><li>Убеждаемся, что всё работает:</li></ol><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>sudo ss -tulpn <span class=p>|</span> grep mysql
+</code></pre></div><h2 id=шаг-второй-тестовая-java-программа>Шаг второй: Тестовая Java программа</h2><p>JDBC - это стандарт взаимодействия Java с СУБД, API. Можно сказать, что это интерфейс, который потом должны реализовывать.<br>mysql-connector - это &ldquo;драйвер&rdquo; для коннекта к СУБД. Или штука, которая реализовывает интерфейс JDBC. Это нужно, чтобы подключаться к СУБД MySQL.<br>Это на пальцах и не формально, всё сложнее)<br>Не путайте с JPA. Подробнее про это лучше почитать тут: <a href=https://habr.com/ru/post/265061/,>https://habr.com/ru/post/265061/,</a> или поищите в интернете: &ldquo;orm, jpa и jdbc&rdquo;</p><ol><li>Находим где-нибудь mysql-connector-java-x.x.xx.jar. Например так:</li></ol><p>Перейдите на сайт: <a href=https://downloads.mysql.com/archives/c-j/>https://downloads.mysql.com/archives/c-j/</a></p><p>Выбираем <code>Platform Independent</code> и скачиваем zip или tar archive. Там и будет <code>mysql-connector-java-x.x.xx.jar</code> (вместо x.x.xx должны быть циферки).
+В моём случае - это <code>mysql-connector-java-8.0.23.jar</code></p><ol start=2><li><p>Закидываем JAR-файл в директорию, содержащуюся в <code>CLASSPATH</code>. Например в корень проекта. Но лучше создать папку <code>./lib/</code> и закинуть туда, потом укажем Java, где его искать (в пункте 4).</p></li><li><p>Создадим файл <code>JavaToMySQL.java</code>. Пробуем написать программу:</p></li></ol><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kn>import</span> <span class=nn>java.sql.Connection</span><span class=o>;</span>
+<span class=kn>import</span> <span class=nn>java.sql.DriverManager</span><span class=o>;</span>
+<span class=kn>import</span> <span class=nn>java.sql.ResultSet</span><span class=o>;</span>
+<span class=kn>import</span> <span class=nn>java.sql.SQLException</span><span class=o>;</span>
+<span class=kn>import</span> <span class=nn>java.sql.Statement</span><span class=o>;</span>
+
+<span class=kd>public</span> <span class=kd>class</span> <span class=nc>JavaToMySQL</span> <span class=o>{</span>
+
+    <span class=c1>// JDBC URL, username and password of MySQL server
+</span><span class=c1></span>    <span class=c1>// Обратите внимание на [ip]. Укажите ваш белый ip или localhost
+</span><span class=c1></span>    <span class=kd>private</span> <span class=kd>static</span> <span class=kd>final</span> <span class=n>String</span> <span class=n>url</span> <span class=o>=</span> <span class=s>&#34;jdbc:mysql://[ip]:3306/testDB&#34;</span><span class=o>;</span>
+        <span class=c1>// Помните, мы делали пользователя. Здесь его login и password
+</span><span class=c1></span>    <span class=kd>private</span> <span class=kd>static</span> <span class=kd>final</span> <span class=n>String</span> <span class=n>user</span> <span class=o>=</span> <span class=s>&#34;testUser&#34;</span><span class=o>;</span>
+    <span class=kd>private</span> <span class=kd>static</span> <span class=kd>final</span> <span class=n>String</span> <span class=n>password</span> <span class=o>=</span> <span class=s>&#34;superUser.password2281337&#34;</span><span class=o>;</span>
+
+    <span class=c1>// JDBC variables for opening and managing connection
+</span><span class=c1></span>    <span class=kd>private</span> <span class=kd>static</span> <span class=n>Connection</span> <span class=n>con</span><span class=o>;</span>
+    <span class=kd>private</span> <span class=kd>static</span> <span class=n>Statement</span> <span class=n>stmt</span><span class=o>;</span>
+    <span class=kd>private</span> <span class=kd>static</span> <span class=n>ResultSet</span> <span class=n>rs</span><span class=o>;</span>
+
+    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span> <span class=n>args</span><span class=o>[])</span> <span class=o>{</span>
+        <span class=c1>// Сам запрос к СУБД
+</span><span class=c1></span>        <span class=n>String</span> <span class=n>query</span> <span class=o>=</span> <span class=s>&#34;select count(*) from books&#34;</span><span class=o>;</span>
+
+        <span class=k>try</span> <span class=o>{</span>
+            <span class=c1>// opening database connection to MySQL server
+</span><span class=c1></span>            <span class=n>con</span> <span class=o>=</span> <span class=n>DriverManager</span><span class=o>.</span><span class=na>getConnection</span><span class=o>(</span><span class=n>url</span><span class=o>,</span> <span class=n>user</span><span class=o>,</span> <span class=n>password</span><span class=o>);</span>
+
+            <span class=c1>// getting Statement object to execute query
+</span><span class=c1></span>            <span class=n>stmt</span> <span class=o>=</span> <span class=n>con</span><span class=o>.</span><span class=na>createStatement</span><span class=o>();</span>
+
+            <span class=c1>// executing SELECT query
+</span><span class=c1></span>            <span class=n>rs</span> <span class=o>=</span> <span class=n>stmt</span><span class=o>.</span><span class=na>executeQuery</span><span class=o>(</span><span class=n>query</span><span class=o>);</span>
+
+            <span class=k>while</span> <span class=o>(</span><span class=n>rs</span><span class=o>.</span><span class=na>next</span><span class=o>())</span> <span class=o>{</span>
+                <span class=kt>int</span> <span class=n>count</span> <span class=o>=</span> <span class=n>rs</span><span class=o>.</span><span class=na>getInt</span><span class=o>(</span><span class=n>1</span><span class=o>);</span>
+                <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;Total number of books in the table : &#34;</span> <span class=o>+</span> <span class=n>count</span><span class=o>);</span>
+            <span class=o>}</span>
+
+        <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>SQLException</span> <span class=n>sqlEx</span><span class=o>)</span> <span class=o>{</span>
+            <span class=n>sqlEx</span><span class=o>.</span><span class=na>printStackTrace</span><span class=o>();</span>
+        <span class=o>}</span> <span class=k>finally</span> <span class=o>{</span>
+        <span class=c1>//Знаю, лучше использовать оператор try с ресурсами, чтобы не делать всего этого. Здесь так шакально, чтобы показать, что нужно это вот всё вообще-то закрывать.
+</span><span class=c1></span>            <span class=c1>//close connection ,stmt and resultset here
+</span><span class=c1></span>            <span class=k>try</span> <span class=o>{</span> <span class=n>con</span><span class=o>.</span><span class=na>close</span><span class=o>();</span> <span class=o>}</span> <span class=k>catch</span><span class=o>(</span><span class=n>SQLException</span> <span class=n>se</span><span class=o>)</span> <span class=o>{</span> <span class=cm>/*can&#39;t do anything */</span> <span class=o>}</span>
+            <span class=k>try</span> <span class=o>{</span> <span class=n>stmt</span><span class=o>.</span><span class=na>close</span><span class=o>();</span> <span class=o>}</span> <span class=k>catch</span><span class=o>(</span><span class=n>SQLException</span> <span class=n>se</span><span class=o>)</span> <span class=o>{</span> <span class=cm>/*can&#39;t do anything */</span> <span class=o>}</span>
+            <span class=k>try</span> <span class=o>{</span> <span class=n>rs</span><span class=o>.</span><span class=na>close</span><span class=o>();</span> <span class=o>}</span> <span class=k>catch</span><span class=o>(</span><span class=n>SQLException</span> <span class=n>se</span><span class=o>)</span> <span class=o>{</span> <span class=cm>/*can&#39;t do anything */</span> <span class=o>}</span>
+        <span class=o>}</span>
+    <span class=o>}</span>
+<span class=o>}</span>
+</code></pre></div><ol start=4><li>Самое интересное. Компиляция с драйвером и запуск. Начальные условия:</li></ol><p>Мы находимся в папке <code>.</code><br><code>JavaToMySQL.java</code> находится в папке <code>.</code><br><code>mysql-connector-java-x.x.xx.jar</code> находится в <code>./lib/</code><br>Тогда компиляция:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>&gt; javac -encoding utf-8 -cp .:./lib/mysql-connector-java-x.x.xx.jar JavaToMySQL.java
+</code></pre></div><p>Вместо <code>x.x.xx</code> должны быть циферки. Флаг <code>-encoding utf-8</code> означает, что раскодировать исходники компилятору нужно с помощью <code>utf-8</code>, <code>-cp ...</code> показывает компилятору, где искать классы и jar-ники. И теперь запуск:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>&gt; java -cp .:./lib/mysql-connector-java-x.x.xx.jar JavaToMySQL 
+</code></pre></div><p>Должно вывести: <code>"Total number of books in the table : 2"</code></p><p>Если нет, то проверте, что вы правильно ввели все данные для подключения к СУБД, что вы правильно указали все jar-ники, что вы используйте одиннаковые версии java и javac. Может быть файл <code>mysql-connector-java-x.x.xx.jar</code> скачался битым или неполностью, проверте это. Если это всё не помогло, то подождите, пока не пройдёт полнолуние, и попробуйте снова.</p><p>Следующим шагом подключимся к СУБД с помощью SSH. Если вам это не нужно, то сразу переходите <a href=#%D1%88%D0%B0%D0%B3-%D1%82%D1%80%D0%B5%D1%82%D0%B8%D0%B9-hibernate-pizza-time>к следующему шагу</a></p><h2 id=бонус-подключение-через-ssh>Бонус: Подключение через SSH</h2><p>Как было уже сказано, убедитесь, что в <code>/etc/mysql/mysql.conf.d/mysqld.cnf</code> написано именно <code>"bind-address = 127.0.0.1"</code>, а не <code>"bind-address = 0.0.0.0"</code>.</p><h3 id=вариант-1-всё-ручками>Вариант 1: Всё ручками</h3><p>Итак ситуация следующая. Имеем сервер с белым IP <code>serverIP</code>, где настроен SQL сервер на порте 3306.
+Если у вас Windows 7 или ниже, то используйте puttySSH или переходите сразу к <a href=#%D0%B2%D0%B0%D1%80%D0%B8%D0%B0%D0%BD%D1%82-2-%D0%BC%D1%8B-%D0%B6%D0%B5-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D1%83%D0%B5%D0%BC-java-%D1%82%D0%B0%D0%BA-%D0%B2%D0%B5%D0%B4%D1%8C>следующему пункту</a></p><p>Вводим команду команду, чтобы открыть SSH тунель:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>&gt; ssh -fN -L 1234:localhost:3306 username@serverIP
+</code></pre></div><p>или если вы используете ключи (<code>ssh-keygen</code>)</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>&gt; ssh -L 1234:localhost:3306 username@serverIP <span class=p>&amp;</span>
+</code></pre></div><p>Теперь нужно в программе подключаться к порту 1234, а не 3306.</p><p>Затем всё что необходимо поменять в <code>JavaToMySQL.java</code> - это строку в коде:</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kd>private</span> <span class=kd>static</span> <span class=kd>final</span> <span class=n>String</span> <span class=n>url</span> <span class=o>=</span> <span class=s>&#34;jdbc:mysql://[ip]:3306/testDB&#34;</span><span class=o>;</span>
+</code></pre></div><p>на</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kd>private</span> <span class=kd>static</span> <span class=kd>final</span> <span class=n>String</span> <span class=n>url</span> <span class=o>=</span> <span class=s>&#34;jdbc:mysql://localhost:1234/testDB&#34;</span><span class=o>;</span>
+</code></pre></div><p>Если хотим &ldquo;уничтожить&rdquo; SSG тунель:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>&gt; ps aux <span class=p>|</span> grep <span class=m>1234</span>
+</code></pre></div><p>Найдите там PID кашего процесса, что-то похожее на это:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>the220th   <span class=m>13427</span>  0.0  0.0  <span class=m>14612</span>   <span class=m>732</span> ?        Ss   <span class=o>[</span>время<span class=o>]</span>   0:00 ssh -fN -L 1234:localhost:3306 username@serverIP
+</code></pre></div><p>В данной ситуации нужное нам число - это <code>13427</code></p><p>Уничтожаем:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>&gt; <span class=nb>kill</span> <span class=m>13427</span>    <span class=c1>#(если не поможет, то: sudo kill -9 13427)</span>
+</code></pre></div><h3 id=вариант-2-мы-же-используем-java-так-ведь>Вариант 2: Мы же используем java, так ведь?</h3><p>Чтобы сделать то же самое с Java, вы можете использовать <a href=http://www.jcraft.com/jsch/>JSch</a>. В гайде будет <code>jsch-0.1.55.jar</code>. Сейчас ситуация та же, что и в 4-ом пункте <a href=#%D1%88%D0%B0%D0%B3-%D0%B2%D1%82%D0%BE%D1%80%D0%BE%D0%B9-%D1%82%D0%B5%D1%81%D1%82%D0%BE%D0%B2%D0%B0%D1%8F-java-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0>на шаге два</a>, но в <code>./lib/</code> будет ещё лежать <code>jsch-0.1.55.jar</code>.</p><p>Модифицируем программу. Создадим UpdateMySqlDatabase.java<br>Что изменилось:<br>Добавилась функция:
+<code>makeTunnelSSH()</code>
+и поменялся порт в строке:
+<code>private static final String url = "jdbc:mysql://[ip]:1234/testDB";</code> (было 3306)</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kn>import</span> <span class=nn>java.sql.Connection</span><span class=o>;</span>
+<span class=kn>import</span> <span class=nn>java.sql.DriverManager</span><span class=o>;</span>
+<span class=kn>import</span> <span class=nn>java.sql.ResultSet</span><span class=o>;</span>
+<span class=kn>import</span> <span class=nn>java.sql.SQLException</span><span class=o>;</span>
+<span class=kn>import</span> <span class=nn>java.sql.Statement</span><span class=o>;</span>
+
+<span class=kn>import</span> <span class=nn>com.jcraft.jsch.JSch</span><span class=o>;</span>
+<span class=kn>import</span> <span class=nn>com.jcraft.jsch.Session</span><span class=o>;</span>
+
+<span class=cm>/**
+</span><span class=cm> * Simple Java program to connect to MySQL database running on localhost and
+</span><span class=cm> * running SELECT and INSERT query to retrieve and add data.
+</span><span class=cm> * @author Javin Paul
+</span><span class=cm> */</span>
+<span class=kd>public</span> <span class=kd>class</span> <span class=nc>UpdateMySqlDatabase</span> <span class=o>{</span>
+
+    <span class=c1>// JDBC URL, username and password of MySQL server
+</span><span class=c1></span>    <span class=kd>private</span> <span class=kd>static</span> <span class=kd>final</span> <span class=n>String</span> <span class=n>url</span> <span class=o>=</span> <span class=s>&#34;jdbc:mysql://[ip]:1234/testDB&#34;</span><span class=o>;</span>
+    <span class=kd>private</span> <span class=kd>static</span> <span class=kd>final</span> <span class=n>String</span> <span class=n>user</span> <span class=o>=</span> <span class=s>&#34;testUser&#34;</span><span class=o>;</span>
+    <span class=kd>private</span> <span class=kd>static</span> <span class=kd>final</span> <span class=n>String</span> <span class=n>password</span> <span class=o>=</span> <span class=s>&#34;superUser.password2281337&#34;</span><span class=o>;</span>
+
+    <span class=c1>// JDBC variables for opening and managing connection
+</span><span class=c1></span>    <span class=kd>private</span> <span class=kd>static</span> <span class=n>Connection</span> <span class=n>con</span><span class=o>;</span>
+    <span class=kd>private</span> <span class=kd>static</span> <span class=n>Statement</span> <span class=n>stmt</span><span class=o>;</span>
+    <span class=kd>private</span> <span class=kd>static</span> <span class=n>ResultSet</span> <span class=n>rs</span><span class=o>;</span>
+
+	<span class=kd>private</span> <span class=kd>static</span> <span class=n>Session</span> <span class=n>session</span><span class=o>;</span>
+    <span class=kd>private</span> <span class=kd>static</span> <span class=kt>int</span> <span class=n>lport</span><span class=o>;</span>
+    <span class=kd>private</span> <span class=kd>static</span> <span class=n>String</span> <span class=n>rhost</span><span class=o>;</span>
+    <span class=kd>private</span> <span class=kd>static</span> <span class=kt>int</span> <span class=n>rport</span><span class=o>;</span>
+
+    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span> <span class=n>args</span><span class=o>[])</span> <span class=o>{</span>
+    	<span class=n>makeTunnelSSH</span><span class=o>();</span>
+
+        <span class=n>String</span> <span class=n>query</span> <span class=o>=</span> <span class=s>&#34;select count(*) from books&#34;</span><span class=o>;</span>
+
+        <span class=k>try</span> <span class=o>{</span>
+            <span class=c1>// opening database connection to MySQL server
+</span><span class=c1></span>            <span class=n>con</span> <span class=o>=</span> <span class=n>DriverManager</span><span class=o>.</span><span class=na>getConnection</span><span class=o>(</span><span class=n>url</span><span class=o>,</span> <span class=n>user</span><span class=o>,</span> <span class=n>password</span><span class=o>);</span>
+
+            <span class=c1>// getting Statement object to execute query
+</span><span class=c1></span>            <span class=n>stmt</span> <span class=o>=</span> <span class=n>con</span><span class=o>.</span><span class=na>createStatement</span><span class=o>();</span>
+
+            <span class=c1>// executing SELECT query
+</span><span class=c1></span>            <span class=n>rs</span> <span class=o>=</span> <span class=n>stmt</span><span class=o>.</span><span class=na>executeQuery</span><span class=o>(</span><span class=n>query</span><span class=o>);</span>
+
+            <span class=k>while</span> <span class=o>(</span><span class=n>rs</span><span class=o>.</span><span class=na>next</span><span class=o>())</span> <span class=o>{</span>
+                <span class=kt>int</span> <span class=n>count</span> <span class=o>=</span> <span class=n>rs</span><span class=o>.</span><span class=na>getInt</span><span class=o>(</span><span class=n>1</span><span class=o>);</span>
+                <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;Total number of books in the table : &#34;</span> <span class=o>+</span> <span class=n>count</span><span class=o>);</span>
+            <span class=o>}</span>
+
+        <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>SQLException</span> <span class=n>sqlEx</span><span class=o>)</span> <span class=o>{</span>
+            <span class=n>sqlEx</span><span class=o>.</span><span class=na>printStackTrace</span><span class=o>();</span>
+        <span class=o>}</span> <span class=k>finally</span> <span class=o>{</span>
+            <span class=c1>//close connection ,stmt and resultset here
+</span><span class=c1></span>            <span class=k>try</span> <span class=o>{</span> <span class=n>con</span><span class=o>.</span><span class=na>close</span><span class=o>();</span> <span class=o>}</span> <span class=k>catch</span><span class=o>(</span><span class=n>SQLException</span> <span class=n>se</span><span class=o>)</span> <span class=o>{</span> <span class=cm>/*can&#39;t do anything */</span> <span class=o>}</span>
+            <span class=k>try</span> <span class=o>{</span> <span class=n>stmt</span><span class=o>.</span><span class=na>close</span><span class=o>();</span> <span class=o>}</span> <span class=k>catch</span><span class=o>(</span><span class=n>SQLException</span> <span class=n>se</span><span class=o>)</span> <span class=o>{</span> <span class=cm>/*can&#39;t do anything */</span> <span class=o>}</span>
+            <span class=k>try</span> <span class=o>{</span> <span class=n>rs</span><span class=o>.</span><span class=na>close</span><span class=o>();</span> <span class=o>}</span> <span class=k>catch</span><span class=o>(</span><span class=n>SQLException</span> <span class=n>se</span><span class=o>)</span> <span class=o>{</span> <span class=cm>/*can&#39;t do anything */</span> <span class=o>}</span>
+            <span class=n>session</span><span class=o>.</span><span class=na>disconnect</span><span class=o>();</span>
+        <span class=o>}</span>
+    <span class=o>}</span>
+
+    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>makeTunnelSSH</span><span class=o>(){</span>
+        <span class=n>String</span> <span class=n>user</span> <span class=o>=</span> <span class=s>&#34;Имя пользователя, который user из &gt;ssh user@host&#34;</span><span class=o>;</span>
+        <span class=n>String</span> <span class=n>password</span> <span class=o>=</span> <span class=s>&#34;Пароль этого пользователя&#34;</span><span class=o>;</span>
+        <span class=n>String</span> <span class=n>host</span> <span class=o>=</span> <span class=s>&#34;host из &gt;ssh user@host. Белый ip крч&#34;</span><span class=o>;</span>
+        <span class=kt>int</span> <span class=n>port</span><span class=o>=</span><span class=n>22</span><span class=o>;</span> <span class=c1>//порт для ssh соединения с host
+</span><span class=c1></span>        <span class=k>try</span>
+            <span class=o>{</span>
+            <span class=n>JSch</span> <span class=n>jsch</span> <span class=o>=</span> <span class=k>new</span> <span class=n>JSch</span><span class=o>();</span>
+            <span class=n>session</span> <span class=o>=</span> <span class=n>jsch</span><span class=o>.</span><span class=na>getSession</span><span class=o>(</span><span class=n>user</span><span class=o>,</span> <span class=n>host</span><span class=o>,</span> <span class=n>port</span><span class=o>);</span>
+            <span class=n>lport</span> <span class=o>=</span> <span class=n>1234</span><span class=o>;</span>
+            <span class=n>rhost</span> <span class=o>=</span> <span class=s>&#34;localhost&#34;</span><span class=o>;</span>
+            <span class=n>rport</span> <span class=o>=</span> <span class=n>3306</span><span class=o>;</span>
+            <span class=n>session</span><span class=o>.</span><span class=na>setPassword</span><span class=o>(</span><span class=n>password</span><span class=o>);</span>
+            <span class=n>session</span><span class=o>.</span><span class=na>setConfig</span><span class=o>(</span><span class=s>&#34;StrictHostKeyChecking&#34;</span><span class=o>,</span> <span class=s>&#34;no&#34;</span><span class=o>);</span>
+            <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;Establishing Connection...&#34;</span><span class=o>);</span>
+            <span class=n>session</span><span class=o>.</span><span class=na>connect</span><span class=o>();</span>
+            <span class=kt>int</span> <span class=n>assinged_port</span><span class=o>=</span><span class=n>session</span><span class=o>.</span><span class=na>setPortForwardingL</span><span class=o>(</span><span class=n>lport</span><span class=o>,</span> <span class=n>rhost</span><span class=o>,</span> <span class=n>rport</span><span class=o>);</span>
+            <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;localhost:&#34;</span><span class=o>+</span><span class=n>assinged_port</span><span class=o>+</span><span class=s>&#34; -&gt; &#34;</span><span class=o>+</span><span class=n>rhost</span><span class=o>+</span><span class=s>&#34;:&#34;</span><span class=o>+</span><span class=n>rport</span><span class=o>);</span>
+            <span class=o>}</span>
+        <span class=k>catch</span><span class=o>(</span><span class=n>Exception</span> <span class=n>e</span><span class=o>){</span><span class=n>System</span><span class=o>.</span><span class=na>err</span><span class=o>.</span><span class=na>print</span><span class=o>(</span><span class=n>e</span><span class=o>);}</span>
+    <span class=o>}</span>
+<span class=o>}</span>
+</code></pre></div><p>Компилируем её:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>javac -encoding utf-8 -cp .:./lib/mysql-connector-java-x.x.xx.jar:./lib/jsch-0.1.55.jar UpdateMySqlDatabase.java
+</code></pre></div><p>Запускаем:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>java -cp .:./lib/mysql-connector-java-x.x.xx.jar:./lib/jsch-0.1.55.jar UpdateMySqlDatabase
+</code></pre></div><p>Если всё правильно сделать, то вывод должен быть тот же:<br><code>Total number of books in the table : 2</code></p><p>Забавно, что пока запущена эта программа, то тунель создан и существовать, пока работает программа. Если закоментировать строку
+<code>session.disconnect();</code><br>то программа не завершит свою работу, а значит туннель будет по-прежнему открыт</p><h2 id=шаг-третий-hibernate-pizza-time>Шаг третий: Hibernate pizza time</h2><p>Что за hibernate? Есть СУБД и java. Надо это как-то соединить. JDBC - это как раз и делает:<br><code>java &lt;-> JDBC &lt;-> СУБД</code><br>Но многим кажется, что это сложно. Примумали hibernate:<br><code>java &lt;-> hibernate &lt;-> JDBC &lt;-> СУБД</code><br>А на самом деле вот так:<br><code>java &lt;-> hibernate &lt;-> JDBC и ещё много всего &lt;-> СУБД</code></p><p>Т. е. hibernate использует ещё и то, что реализует JDBC (т. е. mysql-connector), для подключения к БД. Он даёт возможность использовать СУБД &ldquo;без знания&rdquo; SQL, всю эту работу (составление запросов, подключение к БД, проведение транзакций, удаление и создание записей в БД) hiberbate берёт на себя, но за счёт снижения (достаточно сильно) скорости работы программы. Нам же остаётся просто работать с объектами как раньше. Hibernate должен упрощать работу с БД, но это не значит, что можно не знать SQL язык. Также это не значит, что можно не уметь работать с JDBC.</p><p>Но между hibernate и JDBC большая разница.</p><p><code>ORM</code> - технология (шаблон) проектирования, которая(ый) связывает <code>БД</code> с <code>ООП</code></p><p><code>JPA</code> - это стандарт для <code>ORM</code></p><p><code>JDBC</code> - это стандарт для доступа к <code>БД</code></p><p><code>mysql-connector</code> - реализует <code>JDBC</code></p><p><code>hibernate</code> - реализует <code>JPA</code></p><p>Надеюсь, теперь стало лучше с пониманием, что за hibernate. Теперь к делу.</p><p>Скачаем всё необходимое. Заходим на <a href=https://hibernate.org/orm/>hibernate.org/orm/</a> и скачиваем (жмякаем на большую синюю кнопку Download Zip archive). В моём случае <code>hibernate-release-5.4.28.Final.zip</code>. Весит, конечно, он изрядно, но благо нам оттуда нужны лишь файлы из <code>/hibernate-release-x.x.xx.Final/lib/required/</code></p><p>У меня были такие:</p><ul><li>antlr-2.7.7.jar</li><li>FastInfoset-1.2.15.jar</li><li>istack-commons-runtime-3.0.7.jar</li><li>javax.activation-api-1.2.0.jar</li><li>jaxb-api-2.3.1.jar</li><li>jaxb-runtime-2.3.1.jar</li><li>stax-ex-1.8.jar</li><li>txw2-2.3.1.jar</li><li>byte-buddy-1.10.17.jar</li><li>classmate-1.5.1.jar</li><li>dom4j-2.1.3.jar</li><li>hibernate-commons-annotations-5.1.2.Final.jar</li><li>jandex-2.2.3.Final.jar</li><li>javassist-3.27.0-GA.jar</li><li>javax.persistence-api-2.2.jar</li><li>jboss-logging-3.4.1.Final.jar</li><li>jboss-transaction-api_1.2_spec-1.1.1.Final.jar</li><li>hibernate-core-5.4.28.Final.jar</li></ul><p>Много тут всякого&mldr; Почти 15 МБ! Но это ведь целый framework, чего вы хотели?<br>Ещё на момент создания гайда использую <code>mysql-connector-java-8.0.23.jar</code><br>Продолжаем:<br>Задача запустить какой-нибудь код с использованием hibernate. Без IDE&mldr; Попробуем.<br>Закинем ВСЕ эти jar-файлики в <code>./lib/</code><br>Первым делом создадим тестовую БД <code>studtable</code>, таблицу <code>student</code> и пользователя <code>suser</code>:</p><div class=highlight><pre class=chroma><code class=language-sql data-lang=sql><span class=k>CREATE</span><span class=w> </span><span class=k>DATABASE</span><span class=w> </span><span class=n>studtable</span><span class=p>;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=n>use</span><span class=w> </span><span class=n>studtable</span><span class=p>;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=o>`</span><span class=n>student</span><span class=o>`</span><span class=w> </span><span class=p>(</span><span class=w>
+</span><span class=w>  </span><span class=o>`</span><span class=n>id</span><span class=o>`</span><span class=w> </span><span class=nb>int</span><span class=p>(</span><span class=mi>11</span><span class=p>)</span><span class=w> </span><span class=k>NOT</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=n>AUTO_INCREMENT</span><span class=p>,</span><span class=w>
+</span><span class=w>  </span><span class=o>`</span><span class=n>first_name</span><span class=o>`</span><span class=w> </span><span class=nb>varchar</span><span class=p>(</span><span class=mi>45</span><span class=p>)</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=k>NULL</span><span class=p>,</span><span class=w>
+</span><span class=w>  </span><span class=o>`</span><span class=n>last_name</span><span class=o>`</span><span class=w> </span><span class=nb>varchar</span><span class=p>(</span><span class=mi>45</span><span class=p>)</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=k>NULL</span><span class=p>,</span><span class=w>
+</span><span class=w>  </span><span class=o>`</span><span class=n>email</span><span class=o>`</span><span class=w> </span><span class=nb>varchar</span><span class=p>(</span><span class=mi>45</span><span class=p>)</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=k>NULL</span><span class=p>,</span><span class=w>
+</span><span class=w>  </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=w> </span><span class=p>(</span><span class=o>`</span><span class=n>id</span><span class=o>`</span><span class=p>)</span><span class=w>
+</span><span class=w></span><span class=p>)</span><span class=w> </span><span class=n>ENGINE</span><span class=o>=</span><span class=n>InnoDB</span><span class=w> </span><span class=n>AUTO_INCREMENT</span><span class=o>=</span><span class=mi>1</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=n>CHARSET</span><span class=o>=</span><span class=n>latin1</span><span class=p>;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=k>CREATE</span><span class=w> </span><span class=k>USER</span><span class=w> </span><span class=s1>&#39;suser&#39;</span><span class=w> </span><span class=n>IDENTIFIED</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=s1>&#39;suser123?Password&#39;</span><span class=p>;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=k>GRANT</span><span class=w> </span><span class=k>ALL</span><span class=w> </span><span class=k>PRIVILEGES</span><span class=w> </span><span class=k>ON</span><span class=w> </span><span class=n>studtable</span><span class=p>.</span><span class=o>*</span><span class=w> </span><span class=k>TO</span><span class=w> </span><span class=s1>&#39;suser&#39;</span><span class=p>;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=n>FLUSH</span><span class=w> </span><span class=k>PRIVILEGES</span><span class=p>;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=n>exit</span><span class=p>;</span><span class=w>
+</span></code></pre></div><p>Теперь создадим в директории <code>./</code> файлик <code>hibernate.cfg.xml</code> с содержимым:</p><div class=highlight><pre class=chroma><code class=language-xml data-lang=xml><span class=cp>&lt;!DOCTYPE hibernate-configuration PUBLIC
+</span><span class=cp>        &#34;-//Hibernate/Hibernate Configuration DTD 3.0//EN&#34;
+</span><span class=cp>        &#34;http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd&#34;&gt;</span>
+
+<span class=nt>&lt;hibernate-configuration&gt;</span>
+
+    <span class=nt>&lt;session-factory&gt;</span>
+
+        <span class=c>&lt;!-- JDBC Database connection settings --&gt;</span>
+        <span class=nt>&lt;property</span> <span class=na>name=</span><span class=s>&#34;connection.driver_class&#34;</span><span class=nt>&gt;</span>com.mysql.cj.jdbc.Driver<span class=nt>&lt;/property&gt;</span>
+        <span class=nt>&lt;property</span> <span class=na>name=</span><span class=s>&#34;connection.url&#34;</span><span class=nt>&gt;</span>jdbc:mysql://[ip]:3306/studtable<span class=nt>&lt;/property&gt;</span>
+        <span class=nt>&lt;property</span> <span class=na>name=</span><span class=s>&#34;connection.username&#34;</span><span class=nt>&gt;</span>suser<span class=nt>&lt;/property&gt;</span>
+        <span class=nt>&lt;property</span> <span class=na>name=</span><span class=s>&#34;connection.password&#34;</span><span class=nt>&gt;</span>suser123?Password<span class=nt>&lt;/property&gt;</span>
+
+        <span class=c>&lt;!-- JDBC connection pool settings ... using built-in test pool --&gt;</span>
+        <span class=nt>&lt;property</span> <span class=na>name=</span><span class=s>&#34;connection.pool_size&#34;</span><span class=nt>&gt;</span>1<span class=nt>&lt;/property&gt;</span>
+
+        <span class=c>&lt;!-- Select our SQL dialect --&gt;</span>
+        <span class=nt>&lt;property</span> <span class=na>name=</span><span class=s>&#34;dialect&#34;</span><span class=nt>&gt;</span>org.hibernate.dialect.MySQLDialect<span class=nt>&lt;/property&gt;</span>
+
+        <span class=c>&lt;!-- Echo the SQL to stdout --&gt;</span>
+        <span class=nt>&lt;property</span> <span class=na>name=</span><span class=s>&#34;show_sql&#34;</span><span class=nt>&gt;</span>true<span class=nt>&lt;/property&gt;</span>
+
+		<span class=c>&lt;!-- Set the current session context --&gt;</span>
+		<span class=nt>&lt;property</span> <span class=na>name=</span><span class=s>&#34;current_session_context_class&#34;</span><span class=nt>&gt;</span>thread<span class=nt>&lt;/property&gt;</span>
+ 
+    <span class=nt>&lt;/session-factory&gt;</span>
+
+<span class=nt>&lt;/hibernate-configuration&gt;</span>
+</code></pre></div><p>Чтобы hibernate указать, что объект должен соответствовать записи в БД, то:</p><ul><li>Создаём специальный xml файл. Но это устарело и не будем рассматривать</li><li>Или аннорируем код (то, что начинается с символа <code>@</code>)
+Рассмотрим аннотацию на примере Student.java:</li></ul><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kn>import</span> <span class=nn>javax.persistence.Column</span><span class=o>;</span>
+<span class=kn>import</span> <span class=nn>javax.persistence.Entity</span><span class=o>;</span>
+<span class=kn>import</span> <span class=nn>javax.persistence.GeneratedValue</span><span class=o>;</span>
+<span class=kn>import</span> <span class=nn>javax.persistence.GenerationType</span><span class=o>;</span>
+<span class=kn>import</span> <span class=nn>javax.persistence.Id</span><span class=o>;</span>
+<span class=kn>import</span> <span class=nn>javax.persistence.Table</span><span class=o>;</span>
+
+<span class=c1>//Entity=Объект соответствует записи в таблице
+</span><span class=c1>//                                      Table=название этой таблице
+</span><span class=c1></span><span class=nd>@Entity</span>
+<span class=nd>@Table</span><span class=o>(</span><span class=n>name</span><span class=o>=</span><span class=s>&#34;student&#34;</span><span class=o>)</span>
+<span class=kd>public</span> <span class=kd>class</span> <span class=nc>Student</span> <span class=o>{</span>
+
+    <span class=c1>//Id=что это &#34;primary key&#34; объекта
+</span><span class=c1></span>    <span class=c1>//GeneratedValue=способ генерации этого ключа
+</span><span class=c1></span>    <span class=c1>//strategy=GenerationType.IDENTITY значит также как и в БД. Во время создания таблицы мы указали AUTO_INCREMENT, значит так и будет
+</span><span class=c1></span>    <span class=c1>//Column(name=&#34;id&#34;) значит, что это поле соответствует колонке (полю) id
+</span><span class=c1></span>	<span class=nd>@Id</span>
+	<span class=nd>@GeneratedValue</span><span class=o>(</span><span class=n>strategy</span><span class=o>=</span><span class=n>GenerationType</span><span class=o>.</span><span class=na>IDENTITY</span><span class=o>)</span>
+	<span class=nd>@Column</span><span class=o>(</span><span class=n>name</span><span class=o>=</span><span class=s>&#34;id&#34;</span><span class=o>)</span>
+	<span class=kd>private</span> <span class=kt>int</span> <span class=n>id</span><span class=o>;</span>
+
+	<span class=c1>//Column(name=&#34;first_name&#34;) значит, что это поле соответствует колонке (полю) first_name
+</span><span class=c1></span>	<span class=nd>@Column</span><span class=o>(</span><span class=n>name</span><span class=o>=</span><span class=s>&#34;first_name&#34;</span><span class=o>)</span>
+	<span class=kd>private</span> <span class=n>String</span> <span class=n>firstName</span><span class=o>;</span>
+
+    <span class=c1>//Column(name=&#34;last_name&#34;) значит, что это поле соответствует колонке (полю) last_name
+</span><span class=c1></span>	<span class=nd>@Column</span><span class=o>(</span><span class=n>name</span><span class=o>=</span><span class=s>&#34;last_name&#34;</span><span class=o>)</span>
+	<span class=kd>private</span> <span class=n>String</span> <span class=n>lastName</span><span class=o>;</span>
+	
+    <span class=c1>//Column(name=&#34;email&#34;) значит, что это поле соответствует колонке (полю) email
+</span><span class=c1></span>	<span class=nd>@Column</span><span class=o>(</span><span class=n>name</span><span class=o>=</span><span class=s>&#34;email&#34;</span><span class=o>)</span>
+	<span class=kd>private</span> <span class=n>String</span> <span class=n>email</span><span class=o>;</span>
+	
+	<span class=kd>public</span> <span class=nf>Student</span><span class=o>()</span> <span class=o>{}</span>
+	<span class=kd>public</span> <span class=nf>Student</span><span class=o>(</span><span class=n>String</span> <span class=n>firstName</span><span class=o>,</span> <span class=n>String</span> <span class=n>lastName</span><span class=o>,</span> <span class=n>String</span> <span class=n>email</span><span class=o>)</span> <span class=o>{</span>
+		<span class=k>this</span><span class=o>.</span><span class=na>firstName</span> <span class=o>=</span> <span class=n>firstName</span><span class=o>;</span>
+		<span class=k>this</span><span class=o>.</span><span class=na>lastName</span> <span class=o>=</span> <span class=n>lastName</span><span class=o>;</span>
+		<span class=k>this</span><span class=o>.</span><span class=na>email</span> <span class=o>=</span> <span class=n>email</span><span class=o>;</span>
+	<span class=o>}</span>
+	<span class=kd>public</span> <span class=kt>int</span> <span class=nf>getId</span><span class=o>()</span> <span class=o>{</span>
+		<span class=k>return</span> <span class=n>id</span><span class=o>;</span>
+	<span class=o>}</span>
+	<span class=kd>public</span> <span class=kt>void</span> <span class=nf>setId</span><span class=o>(</span><span class=kt>int</span> <span class=n>id</span><span class=o>)</span> <span class=o>{</span>
+		<span class=k>this</span><span class=o>.</span><span class=na>id</span> <span class=o>=</span> <span class=n>id</span><span class=o>;</span>
+	<span class=o>}</span>
+	<span class=kd>public</span> <span class=n>String</span> <span class=nf>getFirstName</span><span class=o>()</span> <span class=o>{</span>
+		<span class=k>return</span> <span class=n>firstName</span><span class=o>;</span>
+	<span class=o>}</span>
+	<span class=kd>public</span> <span class=kt>void</span> <span class=nf>setFirstName</span><span class=o>(</span><span class=n>String</span> <span class=n>firstName</span><span class=o>)</span> <span class=o>{</span>
+		<span class=k>this</span><span class=o>.</span><span class=na>firstName</span> <span class=o>=</span> <span class=n>firstName</span><span class=o>;</span>
+	<span class=o>}</span>
+	<span class=kd>public</span> <span class=n>String</span> <span class=nf>getLastName</span><span class=o>()</span> <span class=o>{</span>
+		<span class=k>return</span> <span class=n>lastName</span><span class=o>;</span>
+	<span class=o>}</span>
+	<span class=kd>public</span> <span class=kt>void</span> <span class=nf>setLastName</span><span class=o>(</span><span class=n>String</span> <span class=n>lastName</span><span class=o>)</span> <span class=o>{</span>
+		<span class=k>this</span><span class=o>.</span><span class=na>lastName</span> <span class=o>=</span> <span class=n>lastName</span><span class=o>;</span>
+	<span class=o>}</span>
+	<span class=kd>public</span> <span class=n>String</span> <span class=nf>getEmail</span><span class=o>()</span> <span class=o>{</span>
+		<span class=k>return</span> <span class=n>email</span><span class=o>;</span>
+	<span class=o>}</span>
+	<span class=kd>public</span> <span class=kt>void</span> <span class=nf>setEmail</span><span class=o>(</span><span class=n>String</span> <span class=n>email</span><span class=o>)</span> <span class=o>{</span>
+		<span class=k>this</span><span class=o>.</span><span class=na>email</span> <span class=o>=</span> <span class=n>email</span><span class=o>;</span>
+	<span class=o>}</span>
+	<span class=nd>@Override</span>
+	<span class=kd>public</span> <span class=n>String</span> <span class=nf>toString</span><span class=o>()</span> <span class=o>{</span>
+		<span class=k>return</span> <span class=s>&#34;Student [id=&#34;</span> <span class=o>+</span> <span class=n>id</span> <span class=o>+</span> <span class=s>&#34;, firstName=&#34;</span> <span class=o>+</span> <span class=n>firstName</span> <span class=o>+</span> <span class=s>&#34;, lastName=&#34;</span> <span class=o>+</span> <span class=n>lastName</span> <span class=o>+</span> <span class=s>&#34;, email=&#34;</span> <span class=o>+</span> <span class=n>email</span> <span class=o>+</span> <span class=s>&#34;]&#34;</span><span class=o>;</span>
+	<span class=o>}</span>
+<span class=o>}</span>
+</code></pre></div><p>И сам класс <code>CreateStudent.java</code> с подключением:</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kn>import</span> <span class=nn>org.hibernate.Session</span><span class=o>;</span>
+<span class=kn>import</span> <span class=nn>org.hibernate.SessionFactory</span><span class=o>;</span>
+<span class=kn>import</span> <span class=nn>org.hibernate.cfg.Configuration</span><span class=o>;</span>
+
+<span class=kd>public</span> <span class=kd>class</span> <span class=nc>CreateStudent</span> <span class=o>{</span>
+
+	<span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+
+		<span class=c1>// create session factory
+</span><span class=c1></span>		<span class=n>SessionFactory</span> <span class=n>factory</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Configuration</span><span class=o>()</span>
+					<span class=o>.</span><span class=na>configure</span><span class=o>(</span><span class=s>&#34;hibernate.cfg.xml&#34;</span><span class=o>)</span>
+					<span class=o>.</span><span class=na>addAnnotatedClass</span><span class=o>(</span><span class=n>Student</span><span class=o>.</span><span class=na>class</span><span class=o>)</span>
+					<span class=o>.</span><span class=na>buildSessionFactory</span><span class=o>();</span>
+		
+		<span class=c1>// create session
+</span><span class=c1></span>		<span class=n>Session</span> <span class=n>session</span> <span class=o>=</span> <span class=n>factory</span><span class=o>.</span><span class=na>getCurrentSession</span><span class=o>();</span>
+		
+		<span class=k>try</span> <span class=o>{</span>			
+			<span class=c1>// create a student object
+</span><span class=c1></span>			<span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;Creating new student object...&#34;</span><span class=o>);</span>
+
+            <span class=c1>// Когда создавали factory, то указали addAnnotatedClass(Student.class). Обратите на это внимание, когда дойдёте до session.save(tempStudent) 
+</span><span class=c1></span>			<span class=n>Student</span> <span class=n>tempStudent</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Student</span><span class=o>(</span><span class=s>&#34;Paul&#34;</span><span class=o>,</span> <span class=s>&#34;Wall&#34;</span><span class=o>,</span> <span class=s>&#34;blblbl@horse.hole&#34;</span><span class=o>);</span>
+			
+			<span class=c1>// start a transaction
+</span><span class=c1></span>			<span class=n>session</span><span class=o>.</span><span class=na>beginTransaction</span><span class=o>();</span>
+			
+			<span class=c1>// save the student object
+</span><span class=c1></span>			<span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;Saving the student...&#34;</span><span class=o>);</span>
+			<span class=n>session</span><span class=o>.</span><span class=na>save</span><span class=o>(</span><span class=n>tempStudent</span><span class=o>);</span>
+			
+			<span class=c1>// commit transaction
+</span><span class=c1></span>			<span class=n>session</span><span class=o>.</span><span class=na>getTransaction</span><span class=o>().</span><span class=na>commit</span><span class=o>();</span>
+			
+			<span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;Done!&#34;</span><span class=o>);</span>
+		<span class=o>}</span>
+		<span class=k>finally</span> <span class=o>{</span>
+			<span class=n>factory</span><span class=o>.</span><span class=na>close</span><span class=o>();</span>
+		<span class=o>}</span>
+	<span class=o>}</span>
+
+<span class=o>}</span>
+</code></pre></div><p>Попробуем скомпилировать:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>&gt; javac -encoding utf-8 -cp .:./lib/mysql-connector-java-8.0.23.jar:./lib/antlr-2.7.7.jar:./lib/FastInfoset-1.2.15.jar:./lib/istack-commons-runtime-3.0.7.jar:./lib/javax.activation-api-1.2.0.jar:./lib/jaxb-api-2.3.1.jar:./lib/jaxb-runtime-2.3.1.jar:./lib/stax-ex-1.8.jar:./lib/txw2-2.3.1.jar:./lib/byte-buddy-1.10.17.jar:./lib/classmate-1.5.1.jar:./lib/dom4j-2.1.3.jar:./lib/hibernate-commons-annotations-5.1.2.Final.jar:./lib/jandex-2.2.3.Final.jar:./lib/javassist-3.27.0-GA.jar:./lib/javax.persistence-api-2.2.jar:./lib/jboss-logging-3.4.1.Final.jar:./lib/jboss-transaction-api_1.2_spec-1.1.1.Final.jar:./lib/hibernate-core-5.4.28.Final.jar CreateStudent.java
+</code></pre></div><p>Фуф, сколько символов. Теперь пробуем запустить:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>&gt; java -cp .:./lib/mysql-connector-java-8.0.23.jar:./lib/antlr-2.7.7.jar:./lib/FastInfoset-1.2.15.jar:./lib/istack-commons-runtime-3.0.7.jar:./lib/javax.activation-api-1.2.0.jar:./lib/jaxb-api-2.3.1.jar:./lib/jaxb-runtime-2.3.1.jar:./lib/stax-ex-1.8.jar:./lib/txw2-2.3.1.jar:./lib/byte-buddy-1.10.17.jar:./lib/classmate-1.5.1.jar:./lib/dom4j-2.1.3.jar:./lib/hibernate-commons-annotations-5.1.2.Final.jar:./lib/jandex-2.2.3.Final.jar:./lib/javassist-3.27.0-GA.jar:./lib/javax.persistence-api-2.2.jar:./lib/jboss-logging-3.4.1.Final.jar:./lib/jboss-transaction-api_1.2_spec-1.1.1.Final.jar:./lib/hibernate-core-5.4.28.Final.jar CreateStudent
+</code></pre></div><p>Если не нужен весь этот мусор в консоли, то в файле <code>hibernate.cfg.xml</code> меняем строку <code>&lt;property name="show_sql">true&lt;/property></code> на <code>&lt;property name="show_sql">false&lt;/property></code></p><p>Теперь проверьте, что запись в БД успешно создалась (ну или ждите пока пройдёт полнолуние)</p><p>Мы рассмотрели как установить mySQL (на Linux), как подключить ваш java проект к СУБД, как учесть то, что у вас может быть SQL сервер запущен на настоящем сервере, как создать SSH туннель с помощью стандартных средств и с помощью java, как подключить к вашему проекту hibernate. Много короче рассмотрели. Теперь, можно пользоваться java с SQL с помощью hibernate без IDE (осталось только выучить java, SQL, JDBC и hibernate). Хотя, если вы знаете, как работать в вашей рабочей среде, то сможете спокойно применить этот гайд и к вашей IDE.</p></div></article><hr><div class=post-info></div></main></div><footer class=footer><div class=footer__inner><div class=footer__content><span>&copy; 2021</span>
+<span><a href=the220th.github.io>KOTALEX</a></span>
+<span><a href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank rel=noopener>CC BY-NC 4.0</a></span></div></div><div class=footer__inner><div class=footer__content><span><a href=https://github.com/rhazdon/hugo-theme-hello-friend-ng>Hello Friend NG</a></span><span><a href=http://gohugo.io>Hugo</a></span></div></div></footer></div><script defer language=javascript type=text/javascript src=/the220th.github.io/js/main.js></script><script defer language=javascript type=text/javascript src=/the220th.github.io/js/menu.js></script><script src=https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js></script><script>addBackToTop({diameter:56,backgroundColor:'#2e2c2b',textColor:'#ffc400'})</script></body></html>

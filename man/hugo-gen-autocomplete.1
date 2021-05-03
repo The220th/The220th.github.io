@@ -1,0 +1,112 @@
+.nh
+.TH "HUGO\-GEN\-AUTOCOMPLETE" "1" "Apr 2021" "Hugo 0.82.0" "Hugo Manual"
+
+.SH NAME
+.PP
+hugo\-gen\-autocomplete \- Generate shell autocompletion script for Hugo
+
+
+.SH SYNOPSIS
+.PP
+\fBhugo gen autocomplete [flags]\fP
+
+
+.SH DESCRIPTION
+.PP
+Generates a shell autocompletion script for Hugo.
+
+.PP
+The script is written to the console (stdout).
+
+.PP
+To write to file, add the \fB\fC\-\-completionfile=/path/to/file\fR flag.
+
+.PP
+Add \fB\fC\-\-type={bash, zsh, fish or powershell}\fR flag to set alternative
+shell type.
+
+.PP
+Logout and in again to reload the completion scripts,
+or just source them in directly:
+
+.PP
+.RS
+
+.nf
+$ . /etc/bash\_completion or /path/to/file
+
+.fi
+.RE
+
+
+.SH OPTIONS
+.PP
+\fB\-f\fP, \fB\-\-completionfile\fP=""
+	autocompletion file, defaults to stdout
+
+.PP
+\fB\-h\fP, \fB\-\-help\fP[=false]
+	help for autocomplete
+
+.PP
+\fB\-t\fP, \fB\-\-type\fP="bash"
+	autocompletion type (bash, zsh, fish, or powershell)
+
+
+.SH OPTIONS INHERITED FROM PARENT COMMANDS
+.PP
+\fB\-\-config\fP=""
+	config file (default is path/config.yaml|json|toml)
+
+.PP
+\fB\-\-configDir\fP="config"
+	config dir
+
+.PP
+\fB\-\-debug\fP[=false]
+	debug output
+
+.PP
+\fB\-e\fP, \fB\-\-environment\fP=""
+	build environment
+
+.PP
+\fB\-\-ignoreVendor\fP[=false]
+	ignores any \_vendor directory
+
+.PP
+\fB\-\-ignoreVendorPaths\fP=""
+	ignores any \_vendor for module paths matching the given Glob pattern
+
+.PP
+\fB\-\-log\fP[=false]
+	enable Logging
+
+.PP
+\fB\-\-logFile\fP=""
+	log File path (if set, logging enabled automatically)
+
+.PP
+\fB\-\-quiet\fP[=false]
+	build in quiet mode
+
+.PP
+\fB\-s\fP, \fB\-\-source\fP=""
+	filesystem path to read files relative from
+
+.PP
+\fB\-\-themesDir\fP=""
+	filesystem path to themes directory
+
+.PP
+\fB\-v\fP, \fB\-\-verbose\fP[=false]
+	verbose output
+
+.PP
+\fB\-\-verboseLog\fP[=false]
+	verbose logging
+
+
+.SH SEE ALSO
+.PP
+\fBhugo\-gen(1)\fP

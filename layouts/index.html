@@ -1,0 +1,33 @@
+{{ define "body" }}
+
+<body class="{{ if .Site.Params.backgroundImage }} background-image"
+    style="background-image: url('{{ .Site.Params.backgroundImage }}');" {{ else }}"{{ end }}>
+    {{ end }}
+
+    {{ define "main" }}
+    <main aria-role="main">
+        <div>
+            {{ if .Site.Params.Portrait.Path }}
+            <img src="{{ .Site.Params.Portrait.Path }}" class="circle" alt="{{ .Site.Params.Portrait.Alt }}"
+                style="max-width:{{ .Site.Params.Portrait.MaxWidth }}" />
+            {{ end }}
+
+            <img src="lemonade.svg" class="circle" alt="">
+
+            <h1 style="color:#ffa000!important;">{{ .Site.Title }}</h1>
+            <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+            <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+            
+
+            {{- with .Site.Params.homeSubtitle }}
+            <p>{{.}}</p>
+            {{- end }}
+
+            {{- with .Site.Params.social }}
+            <div>
+                {{ partial "social-icons.html" . }}
+            </div>
+            {{- end }}
+        </div>
+    </main>
+    {{ end }}

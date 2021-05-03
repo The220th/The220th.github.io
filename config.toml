@@ -1,0 +1,78 @@
+baseurl      = "the220th.github.io"
+title        = "the220th's stash"
+languageCode = "ru-ru"
+theme        = "hello-friend-ng"
+paginate     = 10
+PygmentsUseClasses = true
+pygmentsOptions = "linenos=false"
+pygmentsCodefencesGuessSyntax = true
+
+# PygmentsCodeFences = true
+# PygmentsStyle = "native"
+# pygmentsCodefencesGuessSyntax = true
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+[author]
+  name = "KOTALEX"  
+[params]
+  dateform        = "Jan 2, 2006"
+  dateformShort   = "Jan 2"
+  dateformNum     = "2006-01-02"
+  dateformNumTime = "2006-01-02 15:04"
+
+  # Subtitle for home
+  homeSubtitle = "Гайды, ресурсы и прочие полезные вещи"
+
+  # Set disableReadOtherPosts to true in order to hide the links to other posts.
+  disableReadOtherPosts = false
+  enableThemeToggle = false
+  # Enable sharing buttons, if you like
+  enableSharingButtons = false
+
+  # Metadata mostly used in document's head
+  description = "Personal site"
+  keywords = "homepage, blog"
+  images = [""]
+  customCSS = [
+    ""
+  ]
+  justifyContent = true
+
+[taxonomies]
+    category = "blog"
+    tag      = "tags"
+    series   = "series"
+
+# [markup.goldmark.renderer]
+#   unsafe= true
+[markup]
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 5
+    ordered = false
+[languages]
+  [languages.en]
+    title = "220th stash"
+    subtitle = ""
+    keywords = ""
+    copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
+    readOtherPosts = "Read other posts"
+
+    [languages.en.params.logo]
+      logoText = "220th stash"
+      logoHomeLink = "/"
+    # or
+    #
+    # path = "/img/your-example-logo.svg"
+    # alt = "Your example logo alt text"
+
+  # And you can even create generic menu
+  [[menu.main]]
+    identifier = "guides"
+    name       = "Гайды"
+    url        = "/guides"
+
+    [[menu.main]]
+    identifier = "resources"
+    name       = "Ресурсы"
+    url        = "/resources"

@@ -1,5 +1,5 @@
 ---
-title: "Search"
+title: "Поиск"
 date: 2021-04-23T00:40:49+03:00
 draft: false
 sitemap:

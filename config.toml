@@ -1,4 +1,4 @@
-baseurl      = "the220th.github.io"
+baseurl      = "https://the220th.github.io"
 title        = "the220th's stash"
 languageCode = "ru-ru"
 theme        = "hello-friend-ng"
@@ -12,8 +12,7 @@ pygmentsCodefencesGuessSyntax = true
 # pygmentsCodefencesGuessSyntax = true
 [outputs]
   home = ["HTML", "RSS", "JSON"]
-[author]
-  name = "KOTALEX"  
+
 [params]
   dateform        = "Jan 2, 2006"
   dateformShort   = "Jan 2"
@@ -52,14 +51,14 @@ pygmentsCodefencesGuessSyntax = true
     ordered = false
 [languages]
   [languages.en]
-    title = "220th stash"
+    title = "the220th stash"
     subtitle = ""
     keywords = ""
     copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
     readOtherPosts = "Read other posts"
 
     [languages.en.params.logo]
-      logoText = "220th stash"
+      logoText = "the220th stash"
       logoHomeLink = "/"
     # or
     #

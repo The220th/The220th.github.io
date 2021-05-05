@@ -47,7 +47,14 @@
     <div class="post-info">
         {{ partial "tags.html" .Params.tags }}
         {{ partial "categories.html" . }}
-        <!-- <span>Автор: </span> -->
+        {{ if .Params.authors}}
+        <p><span>Автор: {{ range .Param "authors" }}
+            {{ . }}
+        {{ end }}
+        </span>
+        {{ end }}</p>
+        <p>Дата публикации: {{ dateFormat .Site.Params.DateForm (default .Date (.PublishDate)) }}</p>
+        
 
         {{- if .GitInfo }}
         <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"

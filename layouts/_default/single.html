@@ -48,12 +48,14 @@
         {{ partial "tags.html" .Params.tags }}
         {{ partial "categories.html" . }}
         {{ if .Params.authors}}
-        <p><span>Автор: {{ range .Param "authors" }}
-            {{ . }}
-        {{ end }}
+        <p><span> {{ delimit .Params.authors ", " }}
         </span>
         {{ end }}</p>
-        <p>Дата публикации: {{ dateFormat .Site.Params.DateForm (default .Date (.PublishDate)) }}</p>
+        {{ $month_names := slice "Января" "Февраля" "Марта" "Апреля" "Мая" "Июня" "Июля" "Августа" "Сентября" "Октября" "Ноября" "Декабря" }}
+        {{ $month := sub .Date.Month 1 }}
+        <p> {{ .Date.Day }} {{ index $month_names $month }}, {{ .Date.Year }} г.</p>
+        
+        
         
 
         {{- if .GitInfo }}

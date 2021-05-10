@@ -17,7 +17,7 @@
   &-title {
     font-size: 2.625rem;
     margin: 0 0 20px;
-    color: #ffa000;
+    color: $hightlight-orange;
     @media #{$media-size-phone} {
       font-size: 2rem;
     }
@@ -119,6 +119,15 @@
       // Default
       background: $dark-background;
       color: $dark-color-secondary;
+      [data-theme=dark] & {
+        background: $dark-background;
+        color: $dark-color-secondary;
+      }
+    
+      [data-theme=light] & {
+        background: $light-background;
+        color: $light-color-secondary;
+      }
     }
 
     hr {
@@ -157,7 +166,13 @@
   appearance: none;
   // Default
   background: $dark-background-secondary;
+  [data-theme=dark] & {
+    background: $dark-background-secondary;
+  }
 
+  [data-theme=light] & {
+    background: $light-background-secondary;
+  }
   + .button {
     margin-left: 10px;
   }

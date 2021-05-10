@@ -2,6 +2,13 @@
   z-index: 9999;
   // Default
   background: $dark-background-header;
+  [data-theme=dark] & {
+    background: $dark-background-header;
+  }
+
+  [data-theme=light] & {
+    background: $light-background-header;
+  }
 
   @media #{$media-size-phone} {
     position: absolute;

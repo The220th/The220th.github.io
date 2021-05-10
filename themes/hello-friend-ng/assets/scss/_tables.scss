@@ -11,6 +11,13 @@
       padding: 12px 15px;
       // Default
       border: 1px solid $dark-table-color;
+      [data-theme=dark] & {
+        border: 1px solid $dark-table-color;
+      }
+    
+      [data-theme=light] & {
+        border: 1px solid $light-table-color;
+      }
     }
 
     thead {
@@ -19,6 +26,15 @@
         // Default
         background-color: $dark-table-color;
         color: $dark-color;
+        [data-theme=dark] & {
+          background-color: $dark-table-color;
+          color: $dark-color;
+        }
+      
+        [data-theme=light] & {
+          background-color: $light-table-color;
+          color: $light-color;
+        }
       }
     }
 
@@ -26,6 +42,13 @@
       tr {
         // Default
         border: 1px solid $dark-table-color;
+        [data-theme=dark] & {
+          border: 1px solid $dark-table-color;
+        }
+      
+        [data-theme=light] & {
+          border: 1px solid $light-table-color;
+        }
       }
     }
   }

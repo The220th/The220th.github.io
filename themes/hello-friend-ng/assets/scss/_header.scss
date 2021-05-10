@@ -6,7 +6,13 @@
   padding: 20px;
   // Default
   background: $dark-background-header;
+  [data-theme=dark] & {
+    background: $dark-background-header;
+  }
 
+  [data-theme=light] & {
+    background: $light-background-header;
+  }
   &__right {
     display: flex;
     flex-direction: row;
@@ -16,6 +22,7 @@
       flex-direction: row-reverse;
     }
   }
+  
 
   &__inner {
     display: flex;
@@ -42,6 +49,7 @@
   cursor: pointer;
   height: 20px;
   width: 20px;
+  margin-left: 10px;
 }
 
 .theme-toggler {

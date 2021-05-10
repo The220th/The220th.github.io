@@ -23,6 +23,14 @@ a.button {
   outline: none;
   // Default
   background: $dark-background-header;
+  [data-theme=dark] & {
+    background: $dark-background-header;
+    color: inherit;
+  }
+
+  [data-theme=light] & {
+    background: $light-background-header;
+  }
 
   &.outline {
     background: transparent;
@@ -30,6 +38,14 @@ a.button {
     padding: 8px 18px;
     // Default
     border-color: $dark-background-secondary;
+    [data-theme=dark] & {
+      border-color: $dark-background-secondary;
+      color: inherit;
+    }
+  
+    [data-theme=light] & {
+      border-color: $light-background-secondary;
+    } 
     color: inherit;
 
     :hover {

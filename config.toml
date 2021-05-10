@@ -25,7 +25,7 @@ pygmentsCodefencesGuessSyntax = true
 
   # Set disableReadOtherPosts to true in order to hide the links to other posts.
   disableReadOtherPosts = false
-  enableThemeToggle = false
+  enableThemeToggle = true
   # Enable sharing buttons, if you like
   enableSharingButtons = false
 

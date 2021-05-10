@@ -12,6 +12,13 @@
   &:not(:last-of-type) {
     // Default
     border-bottom: 1px solid $dark-border-color;
+    [data-theme=dark] & {
+      border-bottom: 1px solid $dark-border-color;
+    }
+  
+    [data-theme=light] & {
+      border-bottom: 1px solid $light-border-color;
+    }
   }
 
   &-group {
@@ -36,6 +43,16 @@
       font-size: 1rem;
       margin: 5px 0 5px 0;
       color: white;
+      @media #{$media-size-phone} {
+        font-size: 1rem;
+      }
+      [data-theme=dark] & {
+        color: $dark-color;
+      }
+    
+      [data-theme=light] & {
+        color: $light-color;
+      }
     }
 
     &-year {

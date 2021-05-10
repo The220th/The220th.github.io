@@ -4,7 +4,17 @@ html {
   letter-spacing: 0.06em;
   scroll-behavior: smooth;
 }
+#back-to-top{
+  background-color: red;
+  [data-theme=dark] & {
+    background-color: $dark-background-header;
+  }
 
+  [data-theme=light] & {
+    background-color: $light-background-header;
+    color: $light-color;
+  }
+}
 *,
 *:before,
 *:after {
@@ -13,6 +23,9 @@ html {
 
 .post-content p {
   text-align: justify;
+}
+.sitetitle{
+  color: $hightlight-orange;
 }
 
 body {
@@ -36,6 +49,19 @@ body {
   // Default
   background-color: $dark-background;
   color: $dark-color;
+  @media #{$media-size-phone} {
+    font-size: 1rem;
+  }
+  
+  [data-theme=dark] & {
+    background-color: $dark-background;
+    color: $dark-color;
+  }
+
+  [data-theme=light] & {
+    background-color: $light-background;
+    color: $light-color;
+  }
 }
 
 h2,
@@ -50,18 +76,18 @@ h6 {
 
 h1 {
   font-size: 2.625rem;
-  color: #ffc400;
+  color: $hightlight-orange;
 }
 
 h2 {
   font-size: 1.625rem;
   margin-top: 2.5em;
-  color: #f3c327;
+  color: $hightlight-yellow;
 }
 
 h3 {
   font-size: 1.375rem;
-  color: #ddbf7d;
+  color: $hightlight-yellow;
 }
 
 h4 {
@@ -175,6 +201,14 @@ figure {
 em, i, strong {
   // Default
   color: white;
+
+  [data-theme=dark] & {
+    color: white;
+  }
+
+  [data-theme=light] & {
+    color: black;
+  }
 }
 
 code {
@@ -189,6 +223,15 @@ code {
   // Default
   background: $dark-background-secondary;
   color: #f8f8f2;
+
+  [data-theme=dark] & {
+    background: $dark-background-secondary;
+  }
+
+  [data-theme=light] & {
+    background: $light-background-secondary;
+    color:#212020;
+  }
 }
 
 pre {
@@ -200,7 +243,7 @@ pre {
 
   @media #{$media-size-phone} {
     white-space: pre-wrap;
-    word-wrap: break-word;
+    word-wrap: normal;
   }
 
   code {
@@ -210,6 +253,7 @@ pre {
     font-size: inherit;
     // Default
     color: inherit;
+
   }
 }
 
@@ -283,6 +327,14 @@ hr {
   height: 1px;
   // Default
   background: $dark-border-color;
+  
+  [data-theme=dark] & {
+    background: $dark-border-color;
+  }
+
+  [data-theme=light] & {
+    background: $light-border-color;
+  }
 }
 
 .hidden {
@@ -364,8 +416,4 @@ hr {
 }
 mark{
   background-color: #ffc400;
-}
-Prism JS Additionals
-.highlight {
-
 }

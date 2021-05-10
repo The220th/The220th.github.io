@@ -25,10 +25,10 @@ function detectOSColorTheme() {
 
 // Switch the theme.
 function switchTheme(e) {
-  if (chosenThemeIsDark) {
-    localStorage.setItem("theme", "light");
-  } else {
+  if (chosenThemeIsLight) {
     localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
   }
 
   detectOSColorTheme();

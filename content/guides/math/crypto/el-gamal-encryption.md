@@ -5,16 +5,14 @@ draft: false
 authors: ["The220th"]
 katex: false
 ---
-{{< toc >}}
+<!-- {{< toc >}} -->
 
 ## Сам алгоритм, шифрование, подпись
 
-[Скачать/читать](/crypto/el-gamal/el-gamal-methodical.pdf)
-
+{{< button "Скачать/читать" "/crypto/el-gamal/el-gamal-methodical.pdf" >}}
 ## Немного про передачу сообщений
 
-[Скачать/читать](/crypto/el-gamal/el-gamal-send-msg-problem.pdf)
-
+{{< button "Скачать/читать" "/crypto/el-gamal/el-gamal-send-msg-problem.pdf" >}}
 ## Атака на алгоритм
 
-[Скачать/читать](/crypto/el-gamal/attack-on-el-gamal.pdf)
+{{< button "Скачать/читать" "/crypto/el-gamal/attack-on-el-gamal.pdf" >}}

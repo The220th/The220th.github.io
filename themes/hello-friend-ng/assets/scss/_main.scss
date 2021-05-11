@@ -397,6 +397,14 @@ hr {
 
 #search-query {
   background: #363433;
+  [data-theme=dark] & {
+    background-color: $dark-background-secondary;
+  }
+
+  [data-theme=light] & {
+    background-color: $light-background-secondary;
+    color: $light-color;
+  }
   border-radius: 5px; //закругление углов (общее)
   -webkit-border-radius: 5px; //закругление углов (Google Chrome)
   -moz-border-radius: 5px; //закругление углов (FireFox)
@@ -409,7 +417,7 @@ hr {
 }
 
 .search-button{
-  color: #c4c0ba;
+  
   font-size: 150%;
   padding: 10px 14px 10px 14px!important;
   font-size: 130%!important;

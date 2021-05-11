@@ -24,12 +24,12 @@ a.button {
   // Default
   background: $dark-background-header;
   [data-theme=dark] & {
-    background: $dark-background-header;
+    background: $dark-background-secondary;
     color: inherit;
   }
 
   [data-theme=light] & {
-    background: $light-background-header;
+    background: $light-background-secondary;
   }
 
   &.outline {

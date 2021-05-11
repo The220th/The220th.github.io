@@ -3,7 +3,7 @@ title: "Организация честного голосования"
 date: 2021-05-04T20:59:46+03:00
 draft: false
 authors: ["The220th"]
-katex: true
+katex: false
 ---
 {{< toc >}}
 

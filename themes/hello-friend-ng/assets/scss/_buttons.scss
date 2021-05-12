@@ -22,7 +22,7 @@ a.button {
   cursor: pointer;
   outline: none;
   // Default
-  background: $dark-background-header;
+  background: $dark-background-secondary;
   [data-theme=dark] & {
     background: $dark-background-secondary;
     color: inherit;

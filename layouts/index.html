@@ -1,7 +1,7 @@
 {{ define "body" }}
 
 <body class="{{ if .Site.Params.backgroundImage }} background-image"
-    style="background-image: url('{{ .Site.Params.backgroundImage }}');" {{ else }}"{{ end }}>
+    style="background-image: url('{{ .Site.Params.backgroundImage }}');" {{ else }}" {{ end }}>
     {{ end }}
 
     {{ define "main" }}
@@ -11,8 +11,8 @@
             <img src="{{ .Site.Params.Portrait.Path }}" class="circle" alt="{{ .Site.Params.Portrait.Alt }}"
                 style="max-width:{{ .Site.Params.Portrait.MaxWidth }}" />
             {{ end }}
-
-            <img src="lemonade.svg" class="circle" alt="">
+            
+            <img src="lemonade.svg" class="mainlogo" alt="">
 
             <h1 class="sitetitle">{{ .Site.Title }}</h1>
             <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->

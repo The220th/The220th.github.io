@@ -49,6 +49,9 @@
       [data-theme=light] & {
         color: $light-color;
       }
+      [data-theme=dark] & {
+        color: $dark-color;
+      }
     }
 
     &-year {

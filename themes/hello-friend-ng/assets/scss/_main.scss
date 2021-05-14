@@ -25,7 +25,7 @@ html {
   text-align: justify;
 }
 .sitetitle{
-  color: $hightlight-orange;
+  color: #ffa000!important;
 }
 
 body {
@@ -77,21 +77,50 @@ h6 {
 h1 {
   font-size: 2.625rem;
   color: $hightlight-orange;
+  [data-theme=dark] & {
+    color: $dark-hightlight-orange;
+  }
+
+  [data-theme=light] & {
+    color: $light-hightlight-orange;
+  }
 }
 
 h2 {
   font-size: 1.625rem;
   margin-top: 2.5em;
   color: $hightlight-yellow;
+  [data-theme=dark] & {
+    color: $dark-hightlight-yellow;
+  }
+
+  [data-theme=light] & {
+    color: $light-hightlight-yellow;
+  }
 }
 
 h3 {
   font-size: 1.375rem;
   color: $hightlight-yellow;
+  [data-theme=dark] & {
+    color: $dark-hightlight-yellow;
+  }
+
+  [data-theme=light] & {
+    color: $light-hightlight-yellow;
+  }
 }
 
 h4 {
   font-size: 1.125rem;
+  color: $hightlight-yellow;
+  [data-theme=dark] & {
+    color: $dark-hightlight-yellow;
+  }
+
+  [data-theme=light] & {
+    color: $light-hightlight-yellow;
+  }
 }
 
 @media #{$media-size-phone} {

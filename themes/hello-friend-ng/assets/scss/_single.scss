@@ -18,6 +18,12 @@
     font-size: 2.625rem;
     margin: 0 0 20px;
     color: $hightlight-orange;
+    [data-theme=dark] & {
+      color: $dark-hightlight-orange;
+    }
+    [data-theme=light] & {
+      color: $light-hightlight-orange;
+    }
     @media #{$media-size-phone} {
       font-size: 2rem;
     }

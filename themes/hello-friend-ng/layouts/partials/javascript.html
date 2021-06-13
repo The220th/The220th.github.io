@@ -1,11 +1,8 @@
-<!-- {{ $main := resources.Get "js/main.js" }}
-{{ $menu := resources.Get "js/menu.js" }} -->
-<!-- {{ $prism := resources.Get "js/prism.js" }} -->
-<!-- {{ $secureJS := slice $main $menu | resources.Concat "bundle.js" | resources.Minify | resources.Fingerprint "sha512" }} -->
-<!-- <script type="text/javascript" src="{{ $secureJS.RelPermalink }}" integrity="{{ $secureJS.Data.Integrity }}"></script> -->
-<!-- <script type="text/javascript" src="{{ $main.RelPermalink }}" integrity="{{ $secureJS.Data.Integrity }}"></script>
-<script type="text/javascript" src="{{ $menu.RelPermalink }}" integrity="{{ $secureJS.Data.Integrity }}"></script> -->
 
+
+{{ $style := resources.Get "/js/backtotop.js" }}
+
+<script defer language="javascript" type="text/javascript"  src="{{ $style.Permalink }}"></script>
 <script defer language="javascript" type="text/javascript"  src="{{ "/js/main.js" | urlize | relURL }}"></script>
 <script defer language="javascript" type="text/javascript"  src="{{ "/js/menu.js" | urlize | relURL }}"></script>
 
@@ -21,9 +18,5 @@
     {{ end }}
 {{ end }}
 
-<script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
-<script>addBackToTop({
-        diameter: 56,
-        backgroundColor: '#2e2c2b',
-        textColor: '#ffc400'
-    })</script>
+
+

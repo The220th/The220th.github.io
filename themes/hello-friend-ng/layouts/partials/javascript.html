@@ -1,10 +1,13 @@
 
 
-{{ $style := resources.Get "/js/backtotop.js" }}
+{{ $backtotop := resources.Get "/js/backtotop.js" }}
+{{ $main := resources.Get "/js/main.js" }}
+{{ $menu := resources.Get "/js/menu.js" }}
 
-<script defer language="javascript" type="text/javascript"  src="{{ $style.Permalink }}"></script>
-<script defer language="javascript" type="text/javascript"  src="{{ "/js/main.js" | urlize | relURL }}"></script>
-<script defer language="javascript" type="text/javascript"  src="{{ "/js/menu.js" | urlize | relURL }}"></script>
+
+<script defer language="javascript" type="text/javascript"  src="{{ $main.Permalink }}"></script>
+<script defer language="javascript" type="text/javascript"  src="{{ $menu.Permalink }}"></script>
+<script defer language="javascript" type="text/javascript"  src="{{ $backtotop.Permalink }}"></script>  
 
 
 

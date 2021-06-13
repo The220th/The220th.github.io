@@ -21,13 +21,20 @@
 {{ end }}
 
 <!-- CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
-    type="text/css">
+
 
 {{ $options := (dict "targetPath" "main.css" "outputStyle" "compressed" "enableSourceMap" true) }}
 {{ $style := resources.Get "scss/main.scss" | resources.ToCSS $options | resources.Fingerprint }}
+
+<link rel="preload" as="font" type="font/woff2" href='../fonts/rubik-v12-latin_cyrillic-regular.woff2' crossorigin>
+<link rel="preload" as="font" type="font/woff2" href='../fonts/rubik-v12-latin_cyrillic-600.woff2' crossorigin>
+<link rel="preload" as="font" type="font/woff2" href='../fonts/rubik-v12-latin_cyrillic-italic.woff2' crossorigin>
+<link rel="preload" as="font" type="font/woff2" href='../fonts/rubik-v12-latin_cyrillic-600italic.woff2' crossorigin>
+<link rel="preload" as="font" type="font/woff2" href='../fonts/icofont.woff2"' crossorigin>
+
+<link rel="preload" as="style" href="{{ $style.RelPermalink }}">
 <link rel="stylesheet" href="{{ $style.RelPermalink }}">
-<link rel="stylesheet" href="syntax.css">
+
 
 {{ range $val := $.Site.Params.customCSS }}
     {{ if gt (len $val) 0 }}

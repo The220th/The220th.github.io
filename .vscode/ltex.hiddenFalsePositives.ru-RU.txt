@@ -1,0 +1,2 @@
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qили через Chocolatey({{< ref \"/resources/pc-apps/choco.md\" >}}) для Windows.\\E$"}
+{"rule":"v_ruchnuju","sentence":"^\\QИнформация о них, однако, краудсорсится от других пользователей расширения, которые вручную их помечают.\\E$"}

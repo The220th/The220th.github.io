@@ -42,7 +42,7 @@
     &-title {
       font-size: 1rem;
       margin: 5px 0 5px 0;
-      color: rgb(235, 235, 235);
+      color: $light-color;
       @media #{$media-size-phone} {
         font-size: 1rem;
       }

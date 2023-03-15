@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title> Кратко о... on the220th stash</title><link>https://the220th.github.io/guides/about/</link><description>Recent content in  Кратко о... on the220th stash</description><generator>Hugo -- gohugo.io</generator><language>ru-ru</language><copyright>&lt;a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0&lt;/a></copyright><lastBuildDate>Wed, 15 Mar 2023 00:00:00 +0300</lastBuildDate><atom:link href="https://the220th.github.io/guides/about/index.xml" rel="self" type="application/rss+xml"/><item><title>О Matrix</title><link>https://the220th.github.io/guides/about/matrix/</link><pubDate>Wed, 15 Mar 2023 00:00:00 +0300</pubDate><guid>https://the220th.github.io/guides/about/matrix/</guid><description>Содержание
-Дисклеймер Текст ниже написан дилетантом и может содержать ошибки.
+Дисклеймер Matrix Открытый код Организация сообщений Боты Распределённая архитектура и федерация Групповые комнаты Уведомления Мосты Кроссплатформенность Регистрация Аутентификация Портативно Шифрование Заключение Дисклеймер Текст ниже написан дилетантом и может содержать ошибки.
 Matrix Matrix - это протокол. То есть инструкция, как обмениваться сообщениями. Есть реализации этого протокола:
 Клиентская часть (например, Element). Клиента реализовать легко, поэтому их много.
 Серверная часть (например, Synapse). Серверную часть реализовать сложно, поэтому, реализаций серверов мало.
-Список некоторых реализаций клиентов и серверов можно посмотреть тут.
-Быстрые ответы на вопросы о Matirx можно найти тут.
-Открытый код Протокол Matrix прозрачен, описан и доступен любому желающему.</description></item></channel></rss>
+Список некоторых реализаций клиентов и серверов можно посмотреть тут.</description></item></channel></rss>

@@ -781,11 +781,11 @@ katex: false
 
     4. Подписывает `M_bl_sigC` = sign(`M_bl`, `C_privKey`).
 
-    5. Публикует рядом с `{name_sigV, M_bl}_en` ещё и `M_bl_sigC`.
+    5. Публикует рядом с `{name_sigV, M_bl}_en` ещё и {`M_bl_sigC`, `name_sigV`}.
 
 7. `Голосующий`:
 
-    1. Видит опубликованное `M_bl_sigC` и снимает закрывающее число `r`: `M_sigC` = `unblind`(`M_bl_sigC`, `r`).
+    1. Видит опубликованное {`M_bl_sigC`, `name_sigV`} и снимает закрывающее число `r`: `M_sigC` = `unblind`(`M_bl_sigC`, `r`). Проверяет правильность `name_sigV`.
 
     2. Делает выбор в бюллетене `B`.
 
